@@ -184,7 +184,7 @@ function ting_smart_search_opensearch_pre_execute($request) {
   return NULL;
 }
 
- function ting_smart_search_opensearch_post_execute($request, $response, $raw_response) {
+function ting_smart_search_opensearch_post_execute($request, $response, $raw_response) {
     // Add additional property to resulting object.
     //file_put_contents("/var/www/drupal7vm/drupal/debug/response.txt", print_r($response , TRUE), FILE_APPEND);
     //file_put_contents("/var/www/drupal7vm/drupal/debug/raw_response.txt", print_r($raw_response , TRUE), FILE_APPEND);
