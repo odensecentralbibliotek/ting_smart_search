@@ -188,7 +188,7 @@ function ting_smart_search_opensearch_pre_execute($request) {
     // Add additional property to resulting object.
     //file_put_contents("/var/www/drupal7vm/drupal/debug/response.txt", print_r($response , TRUE), FILE_APPEND);
     //file_put_contents("/var/www/drupal7vm/drupal/debug/raw_response.txt", print_r($raw_response , TRUE), FILE_APPEND);
-    return array('marcexchange' => array('marcxchange data'));
+    // return array('marcexchange' => array('marcxchange data'));
   }
 
   /**
@@ -515,7 +515,7 @@ function smart_search_string_form_submit($form, &$form_state) {
   // Return for to current search path
   $form_state['redirect'] = current_path();
 
-  cache_clear_all(':'.current_path(), 'cache_ting', TRUE);
+  cache_clear_all(':'.current_path(), 'cache_opensearch', TRUE);
   drupal_set_message('Cache for '.'*'.current_path().' this record cleared.');
 }
 
@@ -560,4 +560,9 @@ function smart_search_string_entity_info_alter(&$entity_info) {
  */
 function smart_search_string_field_info_alter(&$field_info) {
      //dpm($field_info);
+}
+
+function ting_smart_search_preprocess_node(&$variables) {
+  //dpm($variables);
+  $variables['classes_array'][] = $variables['field_view_mode']['und'][0]['value'];
 }
