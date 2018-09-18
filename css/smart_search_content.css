@@ -30,3 +30,7 @@ div.node-smart-search-content.teaser h1 {
   width: 74.05%;
   margin-top: 30px;
 }
+
+div.node-smart-search-content.link-only h1 {
+  display: none;
+}
