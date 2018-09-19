@@ -321,7 +321,7 @@ function ting_smart_search_check_boosts($wrapper) {
     //$wrapper = entity_metadata_wrapper('ting_type', $entity_id);
 
     $boost_materials = $wrapper->field_sss_boost_materials->value();
-
+  // We insert material twice to rule out factors applied from the well
     if(!empty($boost_materials)) {
       foreach($boost_materials as $boost_material) {
         $boosts[] =
@@ -329,7 +329,13 @@ function ting_smart_search_check_boosts($wrapper) {
                 'field_name' => 'term.default',
                 'field_value' => urldecode($boost_material),
                 'weight' => $weight,
-             );
+            );
+        $boosts[] =
+            array (
+                'field_name' => 'term.default',
+                'field_value' => urldecode($boost_material),
+                'weight' => $weight,
+            );
         $weight = $weight - 1000;
       }
     }
