@@ -308,7 +308,7 @@ function ting_smart_search_check_sort($query) {
 function ting_smart_search_check_boosts($wrapper) {
   $boosts = array();
   $boost_materials = array();
-  $weight = 10000;
+  $weight = 20000;
   $entity_id = 1;
 
   //$string = trim($query,'()');
@@ -330,6 +330,7 @@ function ting_smart_search_check_boosts($wrapper) {
                 'field_value' => urldecode($boost_material),
                 'weight' => $weight,
             );
+        $weight = $weight - 1000;
         $boosts[] =
             array (
                 'field_name' => 'term.default',
