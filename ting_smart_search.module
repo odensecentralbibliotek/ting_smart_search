@@ -330,14 +330,14 @@ function ting_smart_search_check_boosts($wrapper) {
                 'field_value' => urldecode($boost_material),
                 'weight' => $weight,
             );
-        $weight = $weight - 1000;
+        $weight = $weight - 100;
         $boosts[] =
             array (
                 'field_name' => 'term.default',
                 'field_value' => urldecode($boost_material),
                 'weight' => $weight,
             );
-        $weight = $weight - 1000;
+        $weight = $weight - 2000;
       }
     }
 
