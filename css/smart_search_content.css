@@ -21,7 +21,7 @@ div.node-smart-search-content fieldset.group-smart-search-right {
   float: left;
 }
 
-div.node-smart-search-content.teaser h1 {
+div.node-smart-search-content.full h1 {
   float: right;
   font-family: FaktPro-SemiBold,sans-serif;
   font-size: 18px;
