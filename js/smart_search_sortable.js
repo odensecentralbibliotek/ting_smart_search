@@ -26,7 +26,7 @@ console.log(material_arr);
           var start = $(this).attr('data-previndex');
           $(this).removeAttr('data-previndex');
           $('.ting_search-results .list-item').each(function(n,v){
-            var material = decodeURIComponent($('a', this).attr('href').split(/[/ ]+/).pop());
+            var material = decodeURIComponent($('a', this).attr('href').split(/[/ ]+/).pop().split('?').shift());
 
             if ( start < material_arr.length && n == end ) {
               var temp_mat = material_arr.splice(start, 1)[0];
