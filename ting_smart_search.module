@@ -125,8 +125,7 @@ function ting_smart_search_opensearch_pre_execute($request) {
               //$smart_search_check_replaced = '(' . str_replace(' ', ' and ', $redirect) . ')';
               // Add a general quoted free text search.
               if (!empty($free_text_query = $redirect)) {
-                $cqlDoctor = new TingSearchCqlDoctor($free_text_query);
-                $smart_search_check_replaced = $cqlDoctor->string_to_cql();
+                $smart_search_check_replaced = oc_query_parser($free_text_query);
               }
 
               // Check for sorting
@@ -134,7 +133,6 @@ function ting_smart_search_opensearch_pre_execute($request) {
               $params = $_POST;
               $param_sort = NULL;//drupal_get_query_parameters();
 
-              if ($smart_search_request_sort == 'rank_frequency') {
 
                 if (array_key_exists('sort', $params)) {
                   // Do nothing here
@@ -152,7 +150,7 @@ function ting_smart_search_opensearch_pre_execute($request) {
 
                 //$smart_search_check_boosts = ting_smart_search_check_boosts($request->getQuery());
                
-              }
+              
                $smart_search_check_boosts = ting_smart_search_check_boosts($smart_search_object);
               if ($smart_search_check_replaced == '') {
                 $query = $request->getQuery();
