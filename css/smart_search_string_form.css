@@ -259,3 +259,8 @@
 #edit-field-sss-date .form-type-checkbox label {
   padding-left: 30px;
 }
+.field-group-fieldset .field-group-fieldset
+{
+    margin-top: 34px;
+    margin-bottom: 37px;
+}

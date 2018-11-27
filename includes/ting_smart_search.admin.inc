@@ -13,7 +13,7 @@
  */
 function ting_smart_search_admin_page() {
   $output = '';
-dpm(variable_get('ting_smart_search_well_index_records'));
+//dpm(variable_get('ting_smart_search_well_index_records'));
   $output = drupal_get_form('ting_smart_search_admin_form');
 
   //$output .= drupal_render(drupal_get_form('ting_smart_search_compilestats_form'));

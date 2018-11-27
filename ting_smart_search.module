@@ -97,11 +97,12 @@ function ting_smart_search_opensearch_pre_execute($request) {
         // store the userDefinedBoost if any
         $smart_search_userdefined_boosts = $request->userDefinedBoost;
         //file_put_contents("/var/www/drupal7vm/drupal/debug/udb.txt", print_r($smart_search_userdefined_boosts , TRUE), FILE_APPEND);
-        if (substr( $request->getQuery(), 0, 1 ) === "(") {
+        //if (substr( $request->getQuery(), 0, 1 ) === "(") {
           //$smart_search_check_replaced = ting_smart_search_check_replaced($request->getQuery());
           // $smart_search_check_replaced() - now obsolete
           // Load the entity as object with entity_metadata_wrapper
-          $smart_search_object = ting_smart_search_check_object($request->getQuery());
+        $query = $request->getQuery();
+          $smart_search_object = ting_smart_search_check_object($query);
           if (!empty((array) $smart_search_object)) {
             //do stuff
             $status = $smart_search_object->field_status->value();
@@ -150,9 +151,9 @@ function ting_smart_search_opensearch_pre_execute($request) {
                 }
 
                 //$smart_search_check_boosts = ting_smart_search_check_boosts($request->getQuery());
-                $smart_search_check_boosts = ting_smart_search_check_boosts($smart_search_object);
+               
               }
-
+               $smart_search_check_boosts = ting_smart_search_check_boosts($smart_search_object);
               if ($smart_search_check_replaced == '') {
                 $query = $request->getQuery();
                 //Probably nothing here
@@ -175,7 +176,7 @@ function ting_smart_search_opensearch_pre_execute($request) {
               $request->setQuery($query);
             }
           }
-        }
+        //}
         break;
     }
 
@@ -203,10 +204,11 @@ function ting_smart_search_opensearch_post_execute($request, $response, $raw_res
   function ting_smart_search_check_object($query) {
     $redirect = '';
     $new_string_object = new stdClass();
-
+    
     $string = trim($query,'()');
     $string = str_replace(' and ', ' ', $string);
-
+    $string = str_replace(' "', '', $string); //we qoute standard searches.
+    $string = str_replace('" ', '', $string);
     $ssquery = new EntityFieldQuery();
 
     $ssquery->entityCondition('entity_type', 'ting_type')
@@ -214,7 +216,7 @@ function ting_smart_search_opensearch_post_execute($request, $response, $raw_res
       ->propertyCondition('title', $string, '=');
 
     $result = $ssquery->execute();
-
+    
     if (isset($result['ting_type'])) {
       $string_items_nids = array_keys($result['ting_type']);
       $new_string_object = entity_metadata_wrapper('ting_type', $string_items_nids[0]);
@@ -522,7 +524,7 @@ function smart_search_string_form_submit($form, &$form_state) {
   // Return for to current search path
   $form_state['redirect'] = current_path();
 
-  cache_clear_all(':'.current_path(), 'cache_opensearch', TRUE);
+  //cache_clear_all(':'.current_path(), 'cache_opensearch', TRUE);
   drupal_set_message('Cache for '.'*'.current_path().' this record cleared.');
 
 }
