@@ -18,9 +18,8 @@ $plugin = array(
 
 function ting_smart_search_form_content_type_access() {
   $return = FALSE;
-  global $user;
 //dpm('Inside access check');
-  if ($user->uid == '1') {
+  if (user_has_role(3) || user_has_role(5)) {
     $return = TRUE;
   }
   return $return;
